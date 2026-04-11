@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <header className="relative min-h-[921px] flex items-center overflow-hidden bg-surface">
@@ -30,12 +32,15 @@ export default function Hero() {
                 Custom printed tapes starting from just 1 box. Professional
                 grade adhesion for India&apos;s top D2C brands.
               </p>
-              <button className="bg-primary_container text-on_primary_fixed font-black text-2xl uppercase px-12 py-6 hover:bg-on_surface hover:text-primary_container transition-all group flex items-center gap-4">
+              <Link
+                href="/hero-product"
+                className="bg-primary_container text-on_primary_fixed font-black text-2xl uppercase px-12 py-6 hover:bg-on_surface hover:text-primary_container transition-all group flex items-center gap-4"
+              >
                 START CUSTOMIZING
                 <span className="material-symbols-outlined font-black">
                   arrow_forward
                 </span>
-              </button>
+              </Link>
             </div>
 
             <div className="flex-1 border-t border-on_surface/10 pt-4">
