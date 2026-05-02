@@ -13,21 +13,19 @@ export default function Navbar() {
   const supabase = createClient();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   supabase.auth.getUser().then(({ data }) => {
-  //     setUser(data.user);
-  //     if (data.user) fetchCart();
-  //   });
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
 
-  //   const {
-  //     data: { subscription },
-  //   } = supabase.auth.onAuthStateChange((_event, session) => {
-  //     setUser(session?.user ?? null);
-  //     if (session?.user) fetchCart();
-  //   });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
 
-  //   return () => subscription.unsubscribe();
-  // }, []);
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -35,7 +33,7 @@ export default function Navbar() {
     router.refresh();
   };
 
-  // const cartCount = totalItems();
+  const cartCount = totalItems();
 
   return (
     <nav className="bg-[#fcf9f8] top-0 sticky z-50 w-full border-b border-on_surface/5">
@@ -95,11 +93,11 @@ export default function Navbar() {
             <span className="material-symbols-outlined text-on_surface">
               shopping_cart
             </span>
-            {/* {cartCount > 0 && (
+            {cartCount > 0 && (
               <span className="absolute top-1 right-1 w-4 h-4 bg-primary_container text-on_primary_fixed text-[9px] font-black flex items-center justify-center leading-none">
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
-            )} */}
+            )}
           </Link>
 
           {/* Orders — only when logged in */}
