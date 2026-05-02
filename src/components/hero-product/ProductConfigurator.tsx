@@ -1,24 +1,32 @@
 "use client";
 
+import { Product } from "@/lib/types";
 import { useState } from "react";
+import { useCartStore } from "@/lib/store/cartStore";
 
 const WIDTHS = ["38MM", "48MM", "72MM"];
 const LENGTHS = ["65 METERS", "100 METERS"];
 
-export default function ProductConfigurator() {
+export default function ProductConfigurator({ product }: { product: Product }) {
   const [selectedWidth, setSelectedWidth] = useState("38MM");
   const [selectedLength, setSelectedLength] = useState("65 METERS");
   const [quantity, setQuantity] = useState(1);
+  const config = {
+    width: selectedWidth,
+    length: selectedLength,
+  };
+
+  const addItem = useCartStore((state) => state.addItem);
 
   return (
     <div className="lg:col-span-5 flex flex-col gap-12 sticky top-32">
       {/* Product Title */}
       <div>
         <span className="bg-primary_container text-on_primary_fixed px-3 py-1 text-[10px] font-black tracking-widest uppercase mb-4 inline-block">
-          SKU: CP-BOPP-2024
+          SKU: {product.sku}
         </span>
         <h1 className="text-5xl font-black uppercase tracking-tighter leading-none mb-4">
-          Custom Printed BOPP Tape
+          {product.name}
         </h1>
         <p className="text-on_surface_variant font-medium">
           Bespoke branding. Maximum security. Industrial grade.
@@ -125,8 +133,11 @@ export default function ProductConfigurator() {
           </div>
 
           <div className="grid grid-cols-1 gap-2">
-            <button className="w-full bg-primary_container text-on_primary_fixed py-5 font-black uppercase tracking-widest flex items-center justify-center gap-3 active:scale-95 transition-transform">
-              PROCEED TO CHECKOUT
+            <button
+              onClick={() => addItem(product.id, quantity, config)}
+              className="w-full bg-primary_container text-on_primary_fixed py-5 font-black uppercase tracking-widest"
+            >
+              ADD TO CART
             </button>
             <button className="w-full border-2 border-surface/20 text-surface py-5 font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-surface/10 transition-colors">
               <span className="material-symbols-outlined">request_quote</span>

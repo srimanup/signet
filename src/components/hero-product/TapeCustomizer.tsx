@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 
 const TAPE_COLORS = ["#ffffff", "#fdf2e9", "#c8c6c5"];
-const PRINT_COLORS = ["#000000", "#715d00", "#ba1a1a"];
+const PRINT_COLORS = ["#000000", "#ff0000", "#0000ff", "#00ff00"];
 
 // Default SVG pattern as a data URL (geometric diagonal pattern)
 const DEFAULT_PATTERN =
@@ -11,7 +11,8 @@ const DEFAULT_PATTERN =
 
 export default function TapeCustomizer() {
   const [tapeColor, setTapeColor] = useState("#ffffff");
-  const [spacing, setSpacing] = useState(120);
+  const [printColor, setPrintColor] = useState("#0000ff");
+  const [spacing, setSpacing] = useState(20);
   const [patternSrc, setPatternSrc] = useState(DEFAULT_PATTERN);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -56,14 +57,26 @@ export default function TapeCustomizer() {
           }}
         >
           <div
-            className="absolute inset-0 w-[200%] h-full"
             style={{
-              backgroundImage: `url('${patternSrc}')`,
-              backgroundSize: `${spacing}px auto`,
-              backgroundRepeat: "repeat-x",
-              backgroundPosition: "center",
+              display: "flex",
+              height: "100%",
+              gap: `${(spacing / 100) * 96}px`,
+              paddingLeft: `${(spacing / 100) * 96}px`,
+              alignItems: "center",
             }}
-          />
+          >
+            {Array.from({ length: 20 }).map((_, i) => (
+              <img
+                key={i}
+                src={patternSrc}
+                style={{
+                  height: "62%",
+                  filter: `brightness(0) saturate(100%)`,
+                  backgroundColor: printColor,
+                }}
+              />
+            ))}
+          </div>
           <div className="absolute inset-x-0 top-0 h-1 bg-black/5" />
           <div className="absolute inset-x-0 bottom-0 h-1 bg-black/10" />
         </div>
@@ -134,12 +147,14 @@ export default function TapeCustomizer() {
                     key={c}
                     className="w-8 h-8 border border-outline"
                     style={{ backgroundColor: c }}
+                    onClick={() => setPrintColor(c)}
                   />
                 ))}
                 <input
                   type="color"
                   className="w-8 h-8 p-0 border-0 bg-transparent cursor-pointer"
                   defaultValue="#000000"
+                  onChange={(e) => setPrintColor(e.target.value)}
                 />
               </div>
             </div>
@@ -157,8 +172,8 @@ export default function TapeCustomizer() {
             </div>
             <input
               type="range"
-              min={40}
-              max={400}
+              min={20}
+              max={100}
               value={spacing}
               onChange={(e) => setSpacing(Number(e.target.value))}
               className="w-full h-1 bg-outline cursor-pointer appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:cursor-pointer"
