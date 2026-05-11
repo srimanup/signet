@@ -9,19 +9,22 @@ import type { User } from "@supabase/supabase-js";
 
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
-  const { fetchCart, totalItems } = useCartStore();
+  const { fetchCart, totalItems, clearLocalCart } = useCartStore();
   const supabase = createClient();
   const router = useRouter();
-
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-    });
-
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
+      // INITIAL_SESSION fires on mount — handles both logged-in and logged-out
+      console.log("Auth event:", event);
+      if (event === "INITIAL_SESSION" || event === "SIGNED_IN") {
+        if (session?.user) fetchCart();
+      }
+      if (event === "SIGNED_OUT") {
+        clearLocalCart(); // Clear cart on sign out
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -52,7 +55,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-10">
           <Link
             className="font-black uppercase tracking-tighter text-sm text-on_surface/60 hover:text-on_surface transition-colors"
-            href="/hero-product"
+            href="/products/custom-printed-bopp-tape"
           >
             CUSTOMIZE
           </Link>

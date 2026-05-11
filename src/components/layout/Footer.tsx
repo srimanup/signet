@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-on_surface text-primary_container w-full pt-40 pb-20 px-8">
@@ -20,14 +22,18 @@ export default function Footer() {
               <h4 className="text-white font-black uppercase tracking-widest text-xs mb-4">
                 RESOURCES
               </h4>
-              {["PRODUCTS", "BULK ORDERS", "ABOUT"].map((link) => (
-                <a
-                  key={link}
+              {[
+                { label: "PRODUCTS", href: "/products" },
+                { label: "BULK ORDERS", href: "/contact" },
+                { label: "ABOUT", href: "/about" },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
                   className="font-sans font-medium uppercase tracking-[0.05em] text-[12px] text-white/60 hover:text-primary_container underline underline-offset-4 transition-all"
-                  href="#"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
 
@@ -35,14 +41,18 @@ export default function Footer() {
               <h4 className="text-white font-black uppercase tracking-widest text-xs mb-4">
                 SUPPORT
               </h4>
-              {["CONTACT", "WHATSAPP SUPPORT", "FAQ"].map((link) => (
-                <a
-                  key={link}
+              {[
+                { label: "CONTACT", href: "/contact" },
+                { label: "WHATSAPP SUPPORT", href: "/whatsapp" },
+                { label: "FAQ", href: "/faq" },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
                   className="font-sans font-medium uppercase tracking-[0.05em] text-[12px] text-white/60 hover:text-primary_container underline underline-offset-4 transition-all"
-                  href="#"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
 
@@ -53,8 +63,8 @@ export default function Footer() {
               {["INSTAGRAM", "LINKEDIN"].map((link) => (
                 <a
                   key={link}
-                  className="font-sans font-medium uppercase tracking-[0.05em] text-[12px] text-white/60 hover:text-primary_container underline underline-offset-4 transition-all"
                   href="#"
+                  className="font-sans font-medium uppercase tracking-[0.05em] text-[12px] text-white/60 hover:text-primary_container underline underline-offset-4 transition-all"
                 >
                   {link}
                 </a>

@@ -85,7 +85,6 @@ export default function CheckoutPage() {
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <div className="bg-surface text-on_surface font-sans min-h-screen">
-        <Navbar />
         <main className="max-w-[1920px] mx-auto px-8 py-20">
           <div className="mb-16 border-b-2 border-on_surface/10 pb-8">
             <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase block mb-4">

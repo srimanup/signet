@@ -8,14 +8,18 @@ export default function ContactInfo() {
         </h3>
         <div className="space-y-4">
           <p className="text-3xl font-bold tracking-tight text-on_surface leading-tight">
-            Plot No. 42, Industrial Area Phase II, <br />
-            Okhla, New Delhi, <br />
-            India - 110020
+            Khadi Samiti, Plot no. 10-6-9-21,
+            <br />
+            Bhagya Nagar, Roshan Bagh,
+            <br />
+            Saroor Nagar East,
+            <br />
+            Hyderabad, Telangana 500035
           </p>
           <div className="pt-6">
             <a
               className="inline-flex items-center gap-2 text-primary font-bold hover:underline underline-offset-8"
-              href="#"
+              href="https://maps.app.goo.gl/qrNeNdoKeb6JgkED8"
             >
               <span className="material-symbols-outlined">map</span>
               VIEW ON MAP
@@ -31,10 +35,10 @@ export default function ContactInfo() {
             Sales Inquiries
           </h4>
           <p className="text-xl font-bold text-on_surface">
-            sales@signettapes.com
+            signetmail@gmail.com
           </p>
           <p className="text-xl font-medium text-on_surface_variant">
-            +91 98110 XXXXX
+            +91 91008 88292
           </p>
         </div>
         <div>
@@ -61,7 +65,7 @@ export default function ContactInfo() {
         </p>
         <a
           className="flex items-center justify-center gap-3 bg-[#25D366] text-white py-5 px-8 font-black uppercase tracking-widest text-sm hover:brightness-110 transition-all"
-          href="#"
+          href="https://wa.me/9100888292"
         >
           <span
             className="material-symbols-outlined"

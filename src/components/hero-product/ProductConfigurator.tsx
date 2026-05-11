@@ -3,6 +3,7 @@
 import { Product } from "@/lib/types";
 import { useState } from "react";
 import { useCartStore } from "@/lib/store/cartStore";
+import Link from "next/link";
 
 const WIDTHS = ["38MM", "48MM", "72MM"];
 const LENGTHS = ["65 METERS", "100 METERS"];
@@ -17,7 +18,7 @@ export default function ProductConfigurator({ product }: { product: Product }) {
   };
 
   const addItem = useCartStore((state) => state.addItem);
-
+  console.log("Price per unit (in paise):", product.price);
   return (
     <div className="lg:col-span-5 flex flex-col gap-12 sticky top-32">
       {/* Product Title */}
@@ -119,7 +120,7 @@ export default function ProductConfigurator({ product }: { product: Product }) {
                 ESTIMATED TOTAL
               </span>
               <span className="text-4xl font-black tracking-tighter">
-                ₹14,250.00
+                ₹{((product.price * quantity) / 100).toLocaleString("en-IN")}
               </span>
             </div>
             <div className="text-right">
@@ -140,8 +141,10 @@ export default function ProductConfigurator({ product }: { product: Product }) {
               ADD TO CART
             </button>
             <button className="w-full border-2 border-surface/20 text-surface py-5 font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-surface/10 transition-colors">
-              <span className="material-symbols-outlined">request_quote</span>
-              GET BULK QUOTE
+              <Link href="/contact" className="flex items-center gap-2">
+                <span className="material-symbols-outlined">request_quote</span>
+                GET BULK QUOTE
+              </Link>
             </button>
           </div>
 

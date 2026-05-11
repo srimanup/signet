@@ -8,7 +8,6 @@ import TechSpecGrid from "@/components/contact/TechSpecGrid";
 export default function ContactPage() {
   return (
     <div className="bg-surface text-on_surface font-sans selection:bg-primary_container selection:text-on_primary_fixed">
-      <Navbar />
       <main className="min-h-screen">
         <ContactHero />
 
@@ -21,7 +20,6 @@ export default function ContactPage() {
 
         <TechSpecGrid />
       </main>
-      <Footer />
     </div>
   );
 }

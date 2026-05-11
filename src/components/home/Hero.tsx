@@ -33,7 +33,7 @@ export default function Hero() {
                 grade adhesion for India&apos;s top D2C brands.
               </p>
               <Link
-                href="/hero-product"
+                href="/products/custom-printed-bopp-tape"
                 className="bg-primary_container text-on_primary_fixed font-black text-2xl uppercase px-12 py-6 hover:bg-on_surface hover:text-primary_container transition-all group flex items-center gap-4"
               >
                 START CUSTOMIZING

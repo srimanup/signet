@@ -29,7 +29,6 @@ export default async function OrdersPage() {
 
   return (
     <div className="bg-surface text-on_surface font-sans">
-      <Navbar />
       <main className="max-w-[1920px] mx-auto px-8 py-20 min-h-screen">
         {/* Header */}
         <div className="mb-16 border-b-2 border-on_surface/10 pb-8">
@@ -159,7 +158,6 @@ export default async function OrdersPage() {
           )}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

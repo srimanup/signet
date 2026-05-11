@@ -2,8 +2,6 @@
 
 import { useEffect } from "react";
 import { useCartStore } from "@/lib/store/cartStore";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -20,7 +18,7 @@ export default function CartPage() {
   const router = useRouter();
 
   useEffect(() => {
-    fetchCart();
+    fetchCart(); // always fetch fresh on mount, no conditions
   }, []);
 
   const handleCheckout = () => {
@@ -39,7 +37,6 @@ export default function CartPage() {
 
   return (
     <div className="bg-surface text-on_surface font-sans">
-      <Navbar />
       <main className="max-w-[1920px] mx-auto px-8 py-20 min-h-screen">
         {/* Header */}
         <div className="mb-16 border-b-2 border-on_surface/10 pb-8 flex items-end justify-between">
@@ -211,7 +208,6 @@ export default function CartPage() {
           </div>
         )}
       </main>
-      <Footer />
     </div>
   );
 }

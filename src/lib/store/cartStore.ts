@@ -34,11 +34,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
     if (!error && data) {
       set({ items: data as CartItem[] });
+      console.log("data set");
+
     }
     if (error) {
       console.error("Failed to fetch cart items:", error);
     }
     set({ loading: false });
+    console.log("loading done");
   },
 
   addItem: async (productId, quantity, config = null) => {
@@ -115,6 +118,8 @@ export const useCartStore = create<CartStore>((set, get) => ({
       .neq("id", "00000000-0000-0000-0000-000000000000");
     set({ items: [] });
   },
+
+  clearLocalCart: () => set({ items: [] }),
 
   totalAmount: () => {
     return get().items.reduce((sum, item) => {

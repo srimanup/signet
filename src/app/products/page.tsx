@@ -17,7 +17,6 @@ export default async function Products() {
   const products = await getProducts();
   return (
     <>
-      <Navbar />
       <section className="bg-surface-container-low px-8 pt-20 pb-12 border-b border-outline/10">
         <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="max-w-2xl">
@@ -109,7 +108,6 @@ export default async function Products() {
           </button>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

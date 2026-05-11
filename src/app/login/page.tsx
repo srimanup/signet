@@ -1,15 +1,30 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
+import { get } from "http";
 
 export default function LoginPage() {
   const supabase = createClient();
 
+  //source: supabase documentation for handling OAuth redirect URLs in Next.js
+  const getURL = () => {
+    let url =
+      process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
+      process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
+      "http://localhost:3000/";
+    // Make sure to include `https://` when not localhost.
+    url = url.startsWith("http") ? url : `https://${url}`;
+    // Make sure to include a trailing `/`.
+    url = url.endsWith("/") ? url : `${url}/`;
+    return url;
+  };
+
   const handleGoogleLogin = async () => {
+    const next = new URLSearchParams(window.location.search).get("next") ?? "/";
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: getURL() + next,
       },
     });
   };
